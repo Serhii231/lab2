@@ -1,0 +1,178 @@
+package lab2;
+import java.util.*;
+import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+public class lab2 {
+public static void main(String[] str) {
+	Scanner in = new Scanner (System.in);
+	int m = 0;
+	
+	while(m !=4) {
+		try {
+		System.out.println("1. Перше завдання.\n 2. Друге завдання. \n 3. Третє завдання. \n 4.Вихід");
+		System.out.println("Виберіть один з пунктів меню:");
+		m = in.nextInt();
+		switch(m) {
+		case 1: zavd1();break;
+		case 2: zavd2();break;
+		case 3: zavd3(); break;
+		default: System.out.println("Даного пункту меню не існує!");
+	}
+		}
+	catch(Exception ex) { System.out.println(ex.getMessage()); }
+}
+
+}
+public static void zavd1() {
+	Scanner in = new Scanner (System.in);
+	String str = new String();
+	String str2 = new String();
+	String replStr2= new String();
+	char n = ' ', m= ' ';
+	int i = 1, j = 0, l = 1, k =0, suma = 0;
+	System.out.println("Введіть речення:");
+	str = in.nextLine();
+	n = str.charAt(0);
+	str = " "+ str+ " ";
+	int z = str.length();
+	replStr2  = str;
+	while( i !=z-1) {
+		
+		if(replStr2.charAt(i+1) == ' ') {
+			m =replStr2.charAt(i); j = i;
+			str2 = replStr2.substring(l,j+1);
+			k = 0;
+			Pattern p = Pattern.compile(str2+" ");
+			Matcher q = p.matcher(replStr2);
+			while (q.find()) {
+				k++ ;
+			}
+			if(i <  z-3) {
+				if(k>0) {
+					suma ++;
+					replStr2 = replStr2.replace(" "+str2 + " "," ");
+					i = 0; 
+					replStr2 = replStr2.trim(); 
+					n = replStr2.charAt(0);
+					replStr2 = " " + replStr2+ "  ";
+					z = replStr2.length();
+					j = 0;
+			}
+			}
+			else {
+				suma++;
+				break;
+			}
+		}
+		i++;
+	}
+		System.out.println("Кількість різних слів:" + suma );
+	i = 1;
+	z = str.length();
+	n = str.charAt(0);
+	while( i !=z-1) {
+			
+		if(str.charAt(i+1) == ' ') {m =str.charAt(i); j = i;}
+		if(str.charAt(i-1) == ' ') {n = str.charAt(i); l = i;}
+		if(n==m&&l<j&&str.charAt(i) != ' ') {str2 = str.substring(l,j+1); 
+		str = str.replace(" " +str2+ " ", " ");
+		z = str.length();
+		j = 0;
+		i = 0;
+		}
+		i++;
+	}
+	str = str.trim();
+	System.out.printf(str);
+}
+public static void zavd2() {
+	Scanner in = new Scanner (System.in);
+	try (BufferedReader br = new BufferedReader (new FileReader("F:\\New Folder\\sport.txt"))) {
+		String s; 
+		while((s = br.readLine())!= null) { System.out.println (s+" балів");}}
+	catch(IOException ex) { System.out.println (ex.getMessage()); }
+	System.out.println("Введіть прізвище та ім'я  головного журі:");
+	try (FileWriter writer = new FileWriter("F:\\New Folder\\sport.txt", true)) {
+		String message= in.nextLine(); 
+		writer.append('\n');
+		writer.write(message);
+		writer.close();
+	}
+	catch(IOException ex) { System.out.println(ex.getMessage()); }
+}
+
+public static void zavd3() {
+	Scanner in = new Scanner (System.in);
+	String str = new String();
+	String str2 = new String();
+	String replStr2= new String();
+	char n = ' ', m= ' ';
+	int i = 1, j = 0, l = 1, k =0, suma = 0;
+	try (BufferedReader br = new BufferedReader (new FileReader("F:\\New Folder\\input.txt"))) {
+		String s; 
+		while((s = br.readLine())!= null) {str = s;}}
+catch(IOException ex) { System.out.println (ex.getMessage()); }
+		System.out.println(str);
+	n = str.charAt(0);
+	str = " "+ str+ " ";
+	int z = str.length();
+	replStr2  = str;
+	while( i !=z-1) {
+		
+		if(replStr2.charAt(i+1) == ' ') {
+			m =replStr2.charAt(i); j = i;
+			str2 = replStr2.substring(l,j+1);
+			k = 0;
+			Pattern p = Pattern.compile(str2+" ");
+			Matcher q = p.matcher(replStr2);
+			while (q.find()) {
+				k++ ;
+			}
+			if(i <  z-3) {
+				if(k>0) {
+					suma ++;
+					replStr2 = replStr2.replace(" "+str2 + " "," ");
+					i = 0; 
+					replStr2 = replStr2.trim(); 
+					n = replStr2.charAt(0);
+					replStr2 = " " + replStr2+ "  ";
+					z = replStr2.length();
+					j = 0;
+			}
+			}
+			else {
+				suma++;
+				break;
+			}
+		}
+		i++;
+	}
+		System.out.println("Кількість різних слів:" + suma );
+	i = 1;
+	z = str.length();
+	n = str.charAt(0);
+	while( i !=z-1) {
+			
+		if(str.charAt(i+1) == ' ') {m =str.charAt(i); j = i;}
+		if(str.charAt(i-1) == ' ') {n = str.charAt(i); l = i;}
+		if(n==m&&l<j&&str.charAt(i) != ' ') {str2 = str.substring(l,j+1); 
+		str = str.replace(" " +str2+ " ", " ");
+		z = str.length();
+		j = 0;
+		i = 0;
+		}
+		i++;
+	}
+	str = str.trim();
+	System.out.printf(str);
+	try (FileWriter writer = new FileWriter("F:\\New Folder\\output.txt", false)) {
+		String message= str; 
+		writer.write(message);
+		writer.close();
+	}
+	catch(IOException ex) { System.out.println(ex.getMessage()); }
+}
+}
+
+
